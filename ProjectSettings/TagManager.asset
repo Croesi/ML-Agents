@@ -8,6 +8,8 @@ TagManager:
   - Predator
   - Water
   - Tree
+  - Wall
+  - Fruit
   layers:
   - Default
   - TransparentFX
