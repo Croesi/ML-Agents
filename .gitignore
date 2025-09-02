@@ -35,3 +35,6 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
+*.vsconfig
+/.vs/ML-Agents/FileContentIndex
+/.vs/ML-Agents/v17
