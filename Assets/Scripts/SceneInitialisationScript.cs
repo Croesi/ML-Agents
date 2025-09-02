@@ -23,11 +23,16 @@ public class SceneInitialisationScript : MonoBehaviour
     private List<GameObject> predatorList = new List<GameObject>();
     private List<GameObject> preyList = new List<GameObject>();
 
+    private Camera cam;
+
     // Start is called before the first frame update
     void Start()
     {
         InitialiseStage();
         SpawnEntities();
+        cam = Camera.main;
+        cam.orthographic = true;
+        cam.orthographicSize = stageSize / 2;
     }
 
     // Update is called once per frame
@@ -48,6 +53,8 @@ public class SceneInitialisationScript : MonoBehaviour
 
         GameObject Floor = Stage.transform.GetChild(0).gameObject;
         GameObject Wall = Stage.transform.GetChild(1).gameObject;
+
+        Debug.Log(stageSize);
 
         // create Floor
         Floor.transform.position = new Vector3(0, -1, 0);

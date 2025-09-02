@@ -4,7 +4,6 @@ using UnityEngine;
 public class TreeScript : MonoBehaviour
 {
     private float timer = 0;
-    private int numFruits;
     private Vector3 randomPosition;
 
     public GameObject TreeEntity;
@@ -12,7 +11,9 @@ public class TreeScript : MonoBehaviour
     public float spawnRate;
     public int maxSpawnedFruits;
 
-    private List<GameObject> fruitList = new List<GameObject>();
+    private List<GameObject> inactiveFruits = new List<GameObject>();
+    private List<GameObject> activeFruits = new List<GameObject>();
+
     private float radius;
     private float height;
 
@@ -21,28 +22,34 @@ public class TreeScript : MonoBehaviour
     {
         radius = TreeEntity.transform.GetChild(0).gameObject.transform.localScale.y / 2;
         height = TreeEntity.transform.GetChild(0).gameObject.transform.localPosition.y;
+        CreateFruits();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(inactiveFruits.Count);
+        Debug.Log(activeFruits.Count);
         timer += Time.deltaTime;
-        if (timer >= spawnRate && spawnRate > 0)
+        if (timer >= spawnRate && spawnRate > 0 && inactiveFruits.Count > 0)
         {
             timer = 0;
-            SpawnFruit();
-            Debug.Log(fruitList.Count);
+            GameObject fruit = inactiveFruits[0];
+            fruit.SetActive(true);
+            activeFruits.Add(fruit);
+            inactiveFruits.Remove(fruit);
         }
     }
 
-    void SpawnFruit()
+    void CreateFruits()
     {
-        numFruits = Random.Range(0, maxSpawnedFruits);
-        for (int i = 0; i < numFruits; i++)
+        for (int i = 0; i < maxSpawnedFruits; i++)
         {
             randomPosition = transform.position + Random.onUnitSphere * radius;
             randomPosition.y += height;
-            fruitList.Add(Instantiate(FruitEntity, randomPosition, Random.rotation, TreeEntity.transform));
+            GameObject tempFruit = Instantiate(FruitEntity, randomPosition, Random.rotation, TreeEntity.transform);
+            tempFruit.SetActive(false);
+            inactiveFruits.Add(tempFruit);
         }
     }
 }

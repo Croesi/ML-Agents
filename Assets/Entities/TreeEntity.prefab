@@ -230,4 +230,4 @@ MonoBehaviour:
   TreeEntity: {fileID: 8968585814639032140}
   FruitEntity: {fileID: 6418329192849366637, guid: fcef21306c7f91e4cb2ecdc7c76d1784, type: 3}
   spawnRate: 2
-  maxSpawnedFruits: 5
+  maxSpawnedFruits: 10
